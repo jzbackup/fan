@@ -4,16 +4,23 @@ block content
   div.container
     div.jumbotron
       h1 Login
+          if info
+            p #{info} 
+            p
           if user
             p Welcome, #{user.fullName}
             p
               a.small(href="profile") Edit my profile
-            a.btn.btn-primary(href="/logout") Logout
+            a.btn.btn-primary(href="/users/logout") Logout
           else
-            p Welcome to xx, ready to get started?
+            p Welcome to the blog, Please login!
             p
-              a.btn.btn-primary(href="/login") Login now
+              form#formLogin(name="login", method="post", action="/users/login")
+                input#inputUserName(type="text", placeholder="username", name="username")
+                input#inputUserPassword(type="text", placeholder="password", name="password")
+                button#buttonSubmit(type="submit") login
+              //a.btn.btn-primary(href="/users/login") Login now
             p
               span.small Don't have an account?
               span &nbsp;
-              a.small(href="/register") Register now
+              a.small(href="/users/register") Register now

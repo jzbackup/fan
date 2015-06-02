@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div.container
+    div.jumbotron
+      h1=title
+      form#formAddUser(name="register", method="post", action="/users/register")
+        input#inputUserName(type="text", placeholder="username", name="username")
+        input#inputUserPassword(type="text", placeholder="password", name="password")
+        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
+        button#buttonSubmit(type="submit") submit

@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  div.container
+    div.jumbotron
+      h1 Welcome Home
+      
+        a.btn(href="/users/logout") Log Out
+        if locals.blogs.length != 0
+          p #{blogs[0].uname}
+        else
+          p No blogs
+         
+        p uid: #{uid}
+        if locals.prePaginationUrl
+          p prePaginationUrl: #{prePaginationUrl}
+        if locals.nextPaginationUrl
+          p nextPaginationUrl: #{nextPaginationUrl}
+        p
+        
+      h1 Blogs
+        if locals.blogs.length != 0 
+          ul
+            a.btn(href="/blog/input") Write More
+            each blog, i in blogs
+              li
+                h2 #{blog.title}
+                p #{blog.content}
+                p Author: #{blog.uname}
+                p Last Edit: #{blog.createTime}
+        else
+          p No Blogs yet, start writing one!
+          a.btn(href="/blog/input") Write Blog

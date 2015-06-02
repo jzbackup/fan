@@ -4,11 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
-
+var session = require('express-session');
+var mongoose = require('mongoose');
 
 var app = express();
 
@@ -23,21 +20,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'fan',
+    cookie: { maxAge: 60 * 1000 * 30},
+    resave: true,
+    saveUninitialized: true
+}));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/login', login);
+// connect to db
+mongoose.connect('mongodb://localhost/fan');
 
+// put all the app.get into routes file
+require('./routes')(app);
 
-
+// The error handlings are implemented by middlewares
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace

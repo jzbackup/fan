@@ -1,0 +1,12 @@
+
+extends layout
+
+block content
+  div.container
+    div.jumbotron
+      h1 Edit Blog
+        p Hello, #{uid}
+        form#formAddUser(name="register", method="post", action="/blog/save")
+          input#inputTitle(type="text", placeholder="title", name="title")
+          input#inputContent(type="text", placeholder="content", name="content")
+          button.btn.btn-primary#buttonSubmit(type="submit") 提交
