@@ -1,8 +1,121 @@
 doctype html
-html
+html(lang="zh-CN")
   head
-    title= title
-    link(rel="stylesheet", href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css")
-    //link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" conent="IE=edge")
+    meta(name="viewport" content="width=device=width, initial-scale=1")
+    title bootstrap 101
+    //link(rel="stylesheet", href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css")
+    link(rel='stylesheet', href="/stylesheets/bootstrap.css")
+    //link(rel='stylesheet', href="/stylesheets/style.css")
+    //link(rel="stypesheet", href="/stylesheets/bootstrap-theme.css")
+    //style
+      != h1 {padding: 50px}
+    //script(src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js")
+    //script(src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js")
+    script(src="/javascripts/jquery.js")
+    script(src="/javascripts/bootstrap.js")
   body
-    block content
+    div.container
+      div.container
+        //div.well.well-sm
+          h2.right x.org
+        //p.bg-success Success
+        //div.alert.alert-success.fade.in Congratultions! 
+          a.alert-link(href="/accounts/register") Next Page
+          a.close(href="#" data-dismiss="alert" aria-label="close") &times
+        //div.progress
+          div.progress-bar.progress-bar-striped.active(role="progressbar" aria-valunow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;") 30%
+        //div(class="embed-responsive.embed-responsive-4by3")
+          //iframe(class="embed-responsive-item" src="https://www.youtube.com/watch?v=3ot1GZNuuhQ")
+        //div.dropdown
+          button#dropdownMenu1.btn.btn-default-dopdown-toggle(type="button" data-toggle="dropdown" aria-expanded="true") Dropdown
+            span.caret
+        //div.btn-toolbar(role="toolbar" aria-label="...")
+          button.btn.btn-default(type="button") Left
+          button.btn.btn-default(type="button") Middle
+          button.btn.btn-default(type="button") Right
+          div.btn-group(role="group" aria-label="...")
+            button.btn.btn-default(type="button") Left
+            button.btn.btn-default(type="button") Middle
+            button.btn.btn-default(type="button") Right
+          div.btn-group(role="group")
+            button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-expanded="false") Dropdown
+              span.caret
+            ul.dropdown-menu(role="menu")
+              li 
+                a(href="#") Dropdown link1
+              li 
+                a(href="#") Dropdown link2
+          ul.nav.nav-tabs
+            li.active(role="presentation")
+              a(href="/accounts/login") Login
+            li.active(role="presentation")
+              a(href="/accounts/register") Register
+            li.active(role="presentation")
+              a(href="/accounts/logout") Logout
+        nav.navbar.navbar-default
+          div.container-fluid
+            div.navbar-header
+              button.navbar-toggle(type="button" data-toggle="collapse" data-target="#myNavbar")
+                //span.icon-bar
+                //span.icon-bar
+                //span.icon-bar
+                //span.icon-bar
+                span.badge ...
+              a.navbar-brand(href="#") Blog
+            div#myNavbar.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li
+                  a(href="/home") Home
+                    span.badge 14
+                li
+                  a(href="/accounts/login") Page1
+                li
+                  a(href="/accounts/register") Page2
+              if user
+                p Welcome, #{user.fullName}
+                p
+              else
+                ul.nav.navbar-nav.navbar-right
+                  li
+                    a(href="/accounts/register") 
+                      span.glyphicon.glyphicon-user Sign Up
+                  li
+                    a(href="/accounts/login") 
+                      span.glyphicon.glyphicon-log-in Login
+          //div.container-fluid
+            button.button(data-toggle="collapse" data-target="#my_collapse_navbar") 
+              span.icon-bar
+              span.icon-bar 
+              span.icon-bar
+            a.navbar-brand(href="/") Blog
+            #my_collapse_navbar
+              ul.nav.nav-bar
+                li
+                  a(href="/accounts/home") Home
+                    span.badge 14
+                li
+                  a(href="/accounts/login") Login
+                li
+                  a(href="/accounts/register") Register
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href="/accounts/register")
+                    span.glyphicon.glyphicon-user SignUp
+                li
+                  a(href="/accounts/login")
+                    span.glyphicon.glyphicon-log-in Login
+      div.container
+        div.jumbotron
+          //div.tab-contents
+            div#home.tab-pane.fade.in.active
+              a(href="/accounts/home")
+            div#login.tab-pane.fade
+              a(href="/accounts/login")
+            div#register.tab-pane.fade
+              a(href="/accounts/register")
+          block content
+        div.footer
+          p 2014 
+            a(href = "http://www.google.com", target="_blank") Google

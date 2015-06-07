@@ -1,11 +1,27 @@
 extends layout
 
 block content
-  div.container
-    div.jumbotron
-      h1=title
-      form#formAddUser(name="register", method="post", action="/users/register")
-        input#inputUserName(type="text", placeholder="username", name="username")
-        input#inputUserPassword(type="text", placeholder="password", name="password")
-        input#inputUserEmail(type="text", placeholder="useremail", name="useremail")
-        button#buttonSubmit(type="submit") submit
+  h2 注册
+  if info
+    p.well.well-sm(style ='background: #cdcdcd;') #{info}
+    p
+  form.form-horizontal.text-left#formRegister(name="register" method="post" action="/accounts/register")
+    div.form-group
+      label.control-label.col-sm-2(for="E-mail" aligh="left") E-mail address:
+      div.col-sm-8
+        input.form-control#inputUserEmail(type="email" name="email")
+    div.form-group
+      label.control-label.col-sm-2(for="username") Username:
+      div.col-sm-8
+        input.form-control#inputUserName(type="text" name="username")
+    div.form-group
+      label.control-label.col-sm-2(for="password") Password:
+      div.col-sm-8
+        input.form-control#inputUserPassword(type="password" name="password")
+    div.form-group
+      div.col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type="submit") submit
+    div.form-group
+      div.col-sm-offset-2.col-sm-10
+        p
+          a.small(href="/accounts/register") Forget Password?

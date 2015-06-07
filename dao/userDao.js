@@ -39,8 +39,31 @@ function getUserByName(username, callBack) {
     });
 };
 
+function getUserByEmail(email, callback) {
+    UserModel.find({email:email}).exe(function(err, rows) {
+       if(err) {
+           console.log(err);
+       } else {
+           console.log('rows:' + rows);
+           callback(null, rows);
+       }
+    });
+}
+
 function getUserByNameAndPass(option,callBack) {
     UserModel.find({username:option.username, password:option.password})
+      .exec(function(err,rows) {
+        if(err) {
+            console.log(err);
+        } else {
+            callBack(null,rows);
+        }
+    });
+};
+
+function getUserByEmailAndPass(option,callBack) {
+    console.log(option);
+    UserModel.find({email:option.email, password:option.password})
       .exec(function(err,rows) {
         if(err) {
             console.log(err);
@@ -67,6 +90,8 @@ function addUser(option,callBack) {
 
 exports.getUsersByPageNum = getUsersByPageNum;
 exports.getUserByName = getUserByName;
+exports.getUserByEmail = getUserByEmail;
 exports.addUser = addUser;
 exports.getUserByNameAndPass = getUserByNameAndPass;
+exports.getUserByEmailAndPass = getUserByEmailAndPass;
 exports.getUserById = getUserById;

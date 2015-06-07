@@ -23,4 +23,28 @@ Mongoose
 4. object.save() to save to mongodb
 5. 
 
-MVC
+Weibo Logic
+URL:
+/ website homepage
+  display different contents for logged in user and ananymour user
+/users/home/[user] user's homepage
+  user's homepage, show the user's infomation and his own posts
+/users/post publish an article
+  must be logged in
+/accounts/register register
+  must be not logged in
+/accounts/login login
+  must be not logged in
+/accounts/logout logout
+  must be loggend in
+/accounts/password/reset
+  must be not logged in
+  reset password for an email
+
+Use middleware and next() to check whether user is logged in
+
+Use req.flash('success', 'ok'); to output notification
+
+
+
+

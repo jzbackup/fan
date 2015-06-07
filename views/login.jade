@@ -1,26 +1,45 @@
 extends layout
 
 block content
-  div.container
-    div.jumbotron
-      h1 Login
-          if info
-            p #{info} 
-            p
-          if user
-            p Welcome, #{user.fullName}
-            p
-              a.small(href="profile") Edit my profile
-            a.btn.btn-primary(href="/users/logout") Logout
-          else
-            p Welcome to the blog, Please login!
-            p
-              form#formLogin(name="login", method="post", action="/users/login")
-                input#inputUserName(type="text", placeholder="username", name="username")
-                input#inputUserPassword(type="text", placeholder="password", name="password")
-                button#buttonSubmit(type="submit") login
-              //a.btn.btn-primary(href="/users/login") Login now
-            p
-              span.small Don't have an account?
-              span &nbsp;
-              a.small(href="/users/register") Register now
+  h2 登陆
+  div
+    //a(href='#' data-toggle="tooltip" title="hooray") Hover over me
+    //script.
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+    
+  if info
+    p.well.well-sm(style ='background: #cdcdcd;') #{info} 
+    p
+  if user
+    p Welcome, #{user.fullName}
+    p
+      a.small(href="profile") Edit my profile
+    a.btn.btn-primary(href="/accounts/logout") Logout
+  else
+    //p Welcome to the blog, Please login!
+      //p
+        span.glyphicon.glyphicon-print
+    form.form-horizontal(name="login" method="post" action="/accounts/login")
+      div.form-group
+        label.contral-label.col-sm-2(for="email") Email address:
+        div.col-sm-8
+          input#pwd.form-control(type="email" name="email")
+      div.form-group
+        label.contral-label.col-sm-2(for="pwd") Password:
+        div.col-sm-8
+          input#pwd.form-control(type="password" name="password")
+      //div.form-group
+        div.col-sm-offset-2.col-sm-10
+          div.checkbox
+            input(type="checkbox")
+            label.control-label.col-sm-2 Remember me
+      div.form-group
+        div.col-sm-offset-2.col-sm-8
+          button.btn.btn-primary(type="submit") submit
+    //a.btn.btn-primary(href="/accounts/login") Login now
+    p
+      span.small Don't have an account?
+      span &nbsp;
+      a.small(href="/accounts/register") Register now

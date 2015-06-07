@@ -1,6 +1,6 @@
 //var config = require('./lib/config');
 //var error = require('./routes/error');
-var users = require('./routes/users');
+var accounts = require('./routes/accounts');
 var blog = require('./routes/blog');
 var home = require('./routes/home');
 
@@ -18,8 +18,8 @@ module.exports = function(app) {
 //  app.get('/404', error.notFound);
 //  app.get('/500', error.ProError);
 //  app.get('*', error.notFound);
-    app.use('/users', users);
+    app.use('/accounts', accounts);   // user's homepage, user login, register, logout, post
     app.use('/home', home);
-    app.use('/blog', blog);
+    //app.use('/blog', blog);
     console.log("routers");
 };
