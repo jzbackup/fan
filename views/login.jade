@@ -12,8 +12,8 @@ block content
   if info
     p.well.well-sm(style ='background: #cdcdcd;') #{info} 
     p
-  if user
-    p Welcome, #{user.fullName}
+  if authenticated
+    p Welcome, #{username}
     p
       a.small(href="profile") Edit my profile
     a.btn.btn-primary(href="/accounts/logout") Logout

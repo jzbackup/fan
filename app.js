@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var util = require('util');
+var flash = require('connect-flash');
 
 var app = express();
 
@@ -19,6 +21,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'fan',
@@ -29,6 +32,18 @@ app.use(session({
 
 // connect to db
 mongoose.connect('mongodb://localhost/fan');
+
+// use app.locals, which is available to the connect
+app.use(function(req, res, next) {
+  //res.locals.user = {username:null, authenticated:false};
+  //res.locals.authenticated = ! req.user.ananymous;
+  res.locals.user = req.session.user;
+  //res.locals.authenticated = true;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  //res.locals.session = req.session;
+  next();
+});
 
 // put all the app.get into routes file
 require('./routes')(app);

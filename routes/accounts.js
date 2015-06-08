@@ -5,14 +5,35 @@ var userDao = require('../dao/userDao');
 var blogDao = require('../dao/blogDao');
 var router = express.Router();
 
+function checkLogin(req, res, next) {
+    if (!req.session.user) {
+        req.flash('error', '未登录');
+        return res.redirect('/home');
+    }
+    console.log('check login');
+    next();
+}
+
+function checkNotLogin(req, res, next) {
+    if (req.session.user) {
+        req.flash('error', '已登陆');
+        return res.redirect('/home');
+    }
+    console.log('check not login');
+    next();
+}
+
+router.get('/', checkNotLogin);
 router.get('/', function(req, res, next) {
     res.render('register',{info:'请注册'});
 });
 
+router.get('/register', checkNotLogin);
 router.get('/register',function(req,res,next) {
     res.render('register',{info:'请注册'});
 });
 
+router.post('/register', checkNotLogin);
 router.post('/register',function(req,res,next) {
     console.log('register post');
 
@@ -40,6 +61,7 @@ router.post('/register',function(req,res,next) {
                                         console.log(rows);
                                     }
                                 });
+                req.flash('success', '注册成功，请登陆');
                 res.redirect('login');
                 return;
             }
@@ -47,10 +69,12 @@ router.post('/register',function(req,res,next) {
     });
 });
 
+router.get('/login', checkNotLogin);
 router.get('/login',function(req,res,next){
     res.render('login', {info: '请登录'});
 });
 
+router.post('/login', checkNotLogin);
 router.post('/login',function(req,res,next){
     console.log('login');
 
@@ -65,10 +89,13 @@ router.post('/login',function(req,res,next){
         }else{
             console.log(rows);
             if(rows.length <= 0){
+                //req.flash('error', 'Email或密码不正确！');
                 res.render('login', {info:'Email或密码不正确！'});
+                //res.redirect('login');
                 return;
             } else {
-                req.session.userid = rows[0]._id;
+                req.session.user = rows[0];
+                req.flash('success', '登陆成功');
                 res.redirect('/home');
                 return;
             }
@@ -106,8 +133,10 @@ router.post('/login',function(req,res,next){
 //    }
 //});
 
+router.get('/logout', checkLogin);
 router.get('/logout', function(req,res,next){
-    req.session.userid = null;
+    req.session.user = null;
+    req.flash('success', '已登出');
     res.redirect('/home');
 });
 
