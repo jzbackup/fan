@@ -95,6 +95,8 @@ router.post('/login',function(req,res,next){
                 return;
             } else {
                 req.session.user = rows[0];
+                console.log('user login');
+                console.log(req.session.user);
                 req.flash('success', '登陆成功');
                 res.redirect('/home');
                 return;

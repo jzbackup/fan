@@ -6,9 +6,9 @@ var BlogSchema = new Schema({
 //    _id:ObjectId,
     title: String,
     content: String,
-    uid:String,
-    uname:String,
-    createTime:{type:Date,default:Date.now}
+    uid: String,
+    uname: String,
+    createTime: {type:Date,default:Date.now}
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);

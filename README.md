@@ -29,8 +29,13 @@ URL:
   display different contents for logged in user and ananymour user
 /users/home/[user] user's homepage
   user's homepage, show the user's infomation and his own posts
-/users/post publish an article
+/posts/add publish an article
   must be logged in
+  get and post
+/posts/delete
+  get and post
+/posts/view/id
+  ?how to encode the id? use the name?
 /accounts/register register
   must be not logged in
 /accounts/login login
@@ -41,6 +46,7 @@ URL:
   must be not logged in
   reset password for an email
 
+6/7/15
 Use middleware and next() to check whether user is logged in
 
 Use req.flash('success', 'ok'); to output notification

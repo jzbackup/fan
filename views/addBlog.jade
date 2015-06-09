@@ -3,10 +3,13 @@ extends layout
 
 block content
   div.container
-    div.jumbotron
-      h1 Edit Blog
-        p Hello, #{uid}
-        form#formAddUser(name="register", method="post", action="/blog/save")
-          input#inputTitle(type="text", placeholder="title", name="title")
-          input#inputContent(type="text", placeholder="content", name="content")
-          button.btn.btn-primary#buttonSubmit(type="submit") 提交
+    h2 Edit Blog
+    p Hello, #{user.username}
+    form#formAddUser(name="add post", method="post", action="/posts/add")
+      div.form-group
+        label(for="title") Title:  
+        input#inputTitle(type="text" name="title")
+      div.form-group
+        label(for="content") Content:
+        textarea.form-control#inputContent(type="text" rows="10" name="content")
+      button.btn.btn-primary#buttonSubmit(type="submit") 提交

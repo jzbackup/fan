@@ -1,7 +1,7 @@
 //var config = require('./lib/config');
 //var error = require('./routes/error');
 var accounts = require('./routes/accounts');
-var blog = require('./routes/blog');
+var posts = require('./routes/posts');
 var home = require('./routes/home');
 
 module.exports = function(app) {
@@ -20,6 +20,7 @@ module.exports = function(app) {
 //  app.get('*', error.notFound);
     app.use('/accounts', accounts);   // user's homepage, user login, register, logout, post
     app.use('/home', home);
+    app.use('/posts', posts);         // all the posts related CRUD
     //app.use('/blog', blog);
     console.log("routers");
 };
