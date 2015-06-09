@@ -51,6 +51,9 @@ Use middleware and next() to check whether user is logged in
 
 Use req.flash('success', 'ok'); to output notification
 
+6/8/15
+Add blogs logic
+Change email
 
 
 
